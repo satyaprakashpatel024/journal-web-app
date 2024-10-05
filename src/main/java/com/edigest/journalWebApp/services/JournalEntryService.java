@@ -17,20 +17,29 @@ public class JournalEntryService {
     @Autowired
     private JournalEntryRepository journalEntryRepository;
     @Autowired
-    private UserEntryService userEntryService;
+    private UserService userService;
 
     @Transactional
     public String saveEntry(JournalEntry journalEntry, String userName){
         try {
-            Users user = userEntryService.findByUserName(userName);
+            Users user = userService.findByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry entry = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(entry);
-            userEntryService.saveEntity(user);
+            userService.saveUser(user);
             return "Data saved Successfully.....";
         }
         catch (Exception e){
             return "Data saved failed.......";
+        }
+    }
+
+    public String saveEntry(JournalEntry journalEntry) {
+        try {
+            journalEntryRepository.save(journalEntry);
+            return "Journal Entry Updated Successfully.....";
+        } catch (Exception e) {
+            return "Failed to Update Journal Entry.......";
         }
     }
 
@@ -42,25 +51,26 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public String deleteJournalById(ObjectId id, String userName){
-        try {
-            Users user = userEntryService.findByUserName(userName);
-            user.getJournalEntries().removeIf(entry -> entry.getId().equals(id));
-            userEntryService.saveEntity(user);
-            journalEntryRepository.deleteById(id);
-            return "Data deleted Successfully.....";
+    @Transactional
+    public boolean deleteJournalById(ObjectId id, String userName){
+        try{
+            Users user = userService.findByUserName(userName);
+            boolean removed = user.getJournalEntries().removeIf(entry -> entry.getId().equals(id));
+            if(removed) {
+                userService.saveUser(user);
+                journalEntryRepository.deleteById(id);
+                System.out.println("Journal Entry Deleted Successfully.......");
+                return true;
+            }else {
+                System.out.println("Journal Entry Not Found with given id .......");
+                return false;
+            }
         }
         catch (Exception e){
-            return "Failed to delete Journal Entry.......";
+            System.out.println("Failed to delete Journal Entry........");
+            e.printStackTrace();
+            throw new RuntimeException("Failed to delete Journal Entry........");
         }
     }
 
-    public String saveEntity(JournalEntry journalEntry) {
-        try {
-            journalEntryRepository.save(journalEntry);
-            return "Journal Entry Updated Successfully.....";
-        }catch (Exception e){
-            return "Failed to Update Journal Entry.......";
-        }
-    }
 }

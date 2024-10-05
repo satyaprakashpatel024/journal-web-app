@@ -9,7 +9,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EnableTransactionManagement
 public class JournalApplication {
 
 	public static void main(String[] args) {
@@ -22,3 +21,9 @@ public class JournalApplication {
 	}
 
 }
+
+
+/**
+ *
+ * Flow of program : => controller==>service==>repository
+ */

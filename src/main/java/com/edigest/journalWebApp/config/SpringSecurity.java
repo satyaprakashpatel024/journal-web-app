@@ -26,9 +26,9 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/v1/public/**").permitAll()
-                        .requestMatchers("/api/v1/journal/**", "/api/v1/user/**").authenticated()
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/journal/**", "/user/**").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
@@ -41,9 +41,7 @@ public class SpringSecurity {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth,
-                                @Lazy PasswordEncoder passwordEncoder) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth, @Lazy PasswordEncoder passwordEncoder) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
-
 }

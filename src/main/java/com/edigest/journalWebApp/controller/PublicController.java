@@ -1,17 +1,17 @@
 package com.edigest.journalWebApp.controller;
 
 import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.services.UserEntryService;
+import com.edigest.journalWebApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/public")
+@RequestMapping("/public")
 public class PublicController {
     @Autowired
-    private UserEntryService userEntryService;
+    private UserService userService;
 
     @GetMapping("/health")
     public String healthCheck(){
@@ -21,7 +21,7 @@ public class PublicController {
     @PostMapping("/create-user")
     public ResponseEntity<Users> createUserEntry(@RequestBody Users userEntry){
         try{
-            this.userEntryService.saveEntity(userEntry);
+            this.userService.saveNewUser(userEntry);
             return new ResponseEntity<Users>(userEntry, HttpStatus.CREATED);
         }
         catch (Exception e){

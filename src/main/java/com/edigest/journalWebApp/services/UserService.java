@@ -13,21 +13,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserEntryService {
+public class UserService {
     @Autowired
     private UserEntryRepository userEntryRepository;
+
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void saveEntity(Users userEntry){
+    public void saveNewUser(Users userEntry){
         userEntry.setPassword(passwordEncoder.encode(userEntry.getPassword()));
         userEntry.setRoles(Arrays.asList("USER"));
         userEntryRepository.save(userEntry);
     }
 
-    public void saveUserEntity(Users userEntry){
+    public void saveUser(Users userEntry){
         userEntryRepository.save(userEntry);
     }
-
 
     public List<Users> getAll(){
         return userEntryRepository.findAll();
@@ -41,11 +41,11 @@ public class UserEntryService {
         userEntryRepository.deleteById(id);
     }
 
-    public Users findByUserName(String userName){
-        return userEntryRepository.findByUserName(userName);
-    }
-
     public Users deleteUserByUserName(String userName) {
         return userEntryRepository.deleteByUserName(userName);
+    }
+
+    public Users findByUserName(String userName){
+        return userEntryRepository.findByUserName(userName);
     }
 }

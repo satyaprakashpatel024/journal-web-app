@@ -1,66 +1,60 @@
 package com.edigest.journalWebApp.controller;
 
 import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.services.UserEntryService;
-import org.bson.types.ObjectId;
+import com.edigest.journalWebApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/user")
 public class UserEntryController {
     @Autowired
-    private UserEntryService userEntryService;
+    private UserService userService;
 
-    @GetMapping("/users")
-    public ResponseEntity<?> getAllUsers(){
-        List<Users> data = this.userEntryService.getAll();
-        if(!data.isEmpty() && data != null){
-            return new ResponseEntity<>(data, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("No data found..",HttpStatus.NOT_FOUND);
-    }
-
-
-    @GetMapping("/user/{userName}")
-    public ResponseEntity<Users> getUserByUserName(@PathVariable String userName){
-        Users userEntry = userEntryService.findByUserName(userName);
+    //    get user details if user is authenticated
+    @GetMapping("/get")
+    public ResponseEntity<?> getUserByUserName(){
+        SecurityContext s = SecurityContextHolder.getContext();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        Users userEntry = userService.findByUserName(userName);
         if(userEntry!=null){
             return new ResponseEntity<Users>(userEntry, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("user not found",HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/user/{userName}")
-    public ResponseEntity<?> deleteUserByUserName(@PathVariable String userName){
-        Users user= userEntryService.deleteUserByUserName(userName);
+    //    update the user details after authentication
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUserByUserName(@RequestBody Users user){
+        Authentication authentivation = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentivation.getName();
+        Users userInDb = userService.findByUserName(userName);
+        if(userInDb != null){
+            userInDb.setUserName(user.getUserName());
+            userInDb.setEmail(user.getEmail());
+            userInDb.setPassword(user.getPassword());
+            userService.saveNewUser(userInDb);
+            return new ResponseEntity<>(userInDb, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("User not found...",HttpStatus.NOT_FOUND);
+    }
+
+    //    delete user on the basis of user name
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUserByUserName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        Users user= userService.deleteUserByUserName(userName);
         if(user!=null){
             return new ResponseEntity<>(user,HttpStatus.OK);
         }
         return new ResponseEntity<>("User Not Found",HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/user/update")
-    public ResponseEntity<?> updateUserByUserName(@RequestBody Users user){
-        Authentication authentivation = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentivation.getName();
-        Users oldUser = userEntryService.findByUserName(userName);
-        if(oldUser != null){
-            oldUser.setUserName(user.getUserName());
-            oldUser.setEmail(user.getEmail());
-            oldUser.setPassword(user.getPassword());
-
-            userEntryService.saveEntity(oldUser);
-            return new ResponseEntity<>(oldUser, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
-    }
 }

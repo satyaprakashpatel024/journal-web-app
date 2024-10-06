@@ -25,6 +25,17 @@ public class JournalEntryController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("/register-admin")
+    public ResponseEntity<?> createAdmin(@RequestBody Users admin){
+        try {
+            Users data = userService.saveAdmin(admin);
+            return new ResponseEntity<>(data,HttpStatus.CREATED);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>("ERROR WHILE REGISTERING ADMIN USER",HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/get-all-journal")
     public ResponseEntity<?> getAllJournalEntriesOfUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -48,4 +48,10 @@ public class UserService {
     public Users findByUserName(String userName){
         return userEntryRepository.findByUserName(userName);
     }
+
+    public Users saveAdmin(Users user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("ADMIN","USER"));
+        return userEntryRepository.save(user);
+    }
 }

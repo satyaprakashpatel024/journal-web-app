@@ -28,7 +28,13 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+<!--	</properties>-->
+<!--	<properties>-->
+		<sonar.login>admin</sonar.login>
+		<sonar.password>PFH#23kgrw98971</sonar.password>
+		<sonar.token>sqa_95f415105925f2c15993483689c5dd7f521a71de</sonar.token>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,6 +75,12 @@
 				<configuration>
 					<argLine>-XX:+EnableDynamicAgentLoading</argLine>
 				</configuration>
+			</plugin>
+			<!-- SonarQube plugin -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
 			</plugin>
 		</plugins>
 	</build>

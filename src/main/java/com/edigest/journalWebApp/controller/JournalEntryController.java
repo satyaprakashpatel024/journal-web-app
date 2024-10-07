@@ -52,13 +52,12 @@ public class JournalEntryController {
     public ResponseEntity<?> createEntry(@RequestBody JournalEntry journalEntry){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        String msg = "";
         try{
-            msg += this.journalEntryService.saveEntry(journalEntry,userName);
-            return new ResponseEntity<>(msg, HttpStatus.CREATED);
+            this.journalEntryService.saveEntry(journalEntry,userName);
+            return new ResponseEntity<>("Entry saved Successfully..........", HttpStatus.CREATED);
         }
         catch (Exception e){
-            return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("failed to save entry........",HttpStatus.BAD_REQUEST);
         }
     }
 

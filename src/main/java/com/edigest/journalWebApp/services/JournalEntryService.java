@@ -20,17 +20,16 @@ public class JournalEntryService {
     private UserService userService;
 
     @Transactional
-    public String saveEntry(JournalEntry journalEntry, String userName){
+    public void saveEntry(JournalEntry journalEntry, String userName){
         try {
             Users user = userService.findByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry entry = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(entry);
             userService.saveUser(user);
-            return "Data saved Successfully.....";
         }
         catch (Exception e){
-            return "Data saved failed.......";
+            throw e;
         }
     }
 

@@ -1,9 +1,11 @@
-server:
-  port: 8081
-
 spring:
-  data:
-    mongodb:
-      uri: mongodb+srv://JavaUser:2kYCn4fcwSSaJq3b@cluster0.d1uqn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-      database: journalDb
-      auto-index-creation: true
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+logging:
+  level:
+    com:
+      edigest:
+        journalWebApp: DEBUG

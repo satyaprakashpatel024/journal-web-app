@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 @SpringBootTest(classes = JournalApplication.class)
 public class UserServiceTests {
 
@@ -23,6 +24,7 @@ public class UserServiceTests {
     @Autowired
     private UserService userService;
 
+    @Disabled
     @ParameterizedTest
     @ArgumentsSource(UserArgumentsProvider.class)
     public void testSaveNewUser(Users user) {

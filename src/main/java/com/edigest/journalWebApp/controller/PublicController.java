@@ -19,13 +19,13 @@ public class PublicController {
     }
 
     @PostMapping("/create-user")
-    public ResponseEntity<Users> createUserEntry(@RequestBody Users userEntry){
+    public ResponseEntity<?> createUserEntry(@RequestBody Users userEntry){
         try{
             this.userService.saveNewUser(userEntry);
             return new ResponseEntity<Users>(userEntry, HttpStatus.CREATED);
         }
         catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Duplicate user Name : ",HttpStatus.BAD_REQUEST);
         }
     }
 }

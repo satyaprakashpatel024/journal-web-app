@@ -1,7 +1,7 @@
-package com.edigest.journalWebApp.controller;
+package com.edigest.journalwebapp.controller;
 
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.services.UserService;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class AdminController {
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers(){
         List<Users> all = userService.getAll();
-        if(all!=null && all.size()>0){
+        if(all!=null && !all.isEmpty()){
             return new ResponseEntity<>(all, HttpStatus.OK);
         }
         return new ResponseEntity<>("NO USER FOUND...", HttpStatus.NOT_FOUND);

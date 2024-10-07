@@ -1,8 +1,9 @@
-package com.edigest.journalWebApp.services;
+package com.edigest.journalwebapp.services;
 
-import com.edigest.journalWebApp.Entity.JournalEntry;
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.repository.JournalEntryRepository;
+import com.edigest.journalwebapp.entity.JournalEntry;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.repository.JournalEntryRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class JournalEntryService {
     @Autowired
@@ -58,15 +60,15 @@ public class JournalEntryService {
             if(removed) {
                 userService.saveUser(user);
                 journalEntryRepository.deleteById(id);
-                System.out.println("Journal Entry Deleted Successfully.......");
+                log.info("Journal Entry Deleted Successfully.......");
                 return true;
             }else {
-                System.out.println("Journal Entry Not Found with given id .......");
+                log.error("Journal Entry Not Found with given id .......");
                 return false;
             }
         }
         catch (Exception e){
-            System.out.println("Failed to delete Journal Entry........");
+            log.error("Failed to delete Journal Entry........");
             e.printStackTrace();
             throw new RuntimeException("Failed to delete Journal Entry........");
         }

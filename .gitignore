@@ -33,3 +33,5 @@ build/
 .vscode/
 /src/main/resources/application-dev.yml
 /src/main/resources/application-prod.yml
+/htmlReport/
+/src/main/java/com/edigest/journalwebapp/ApiKeys.java

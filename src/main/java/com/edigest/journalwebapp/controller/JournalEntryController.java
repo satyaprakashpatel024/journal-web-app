@@ -1,9 +1,9 @@
-package com.edigest.journalWebApp.controller;
+package com.edigest.journalwebapp.controller;
 
-import com.edigest.journalWebApp.Entity.JournalEntry;
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.services.JournalEntryService;
-import com.edigest.journalWebApp.services.UserService;
+import com.edigest.journalwebapp.entity.JournalEntry;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.services.JournalEntryService;
+import com.edigest.journalwebapp.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -83,7 +83,7 @@ public class JournalEntryController {
         String userName = authentication.getName();
         boolean removed = journalEntryService.deleteJournalById(myid,userName);
         if(removed)
-        return new ResponseEntity<>("Data deleted ......",HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Data deleted ......",HttpStatus.ACCEPTED);
         return new ResponseEntity<>("Data not found with given id ......",HttpStatus.NOT_FOUND);
     }
 

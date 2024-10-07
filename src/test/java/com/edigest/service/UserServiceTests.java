@@ -1,9 +1,9 @@
 package com.edigest.service;
 
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.JournalApplication;
-import com.edigest.journalWebApp.repository.UserEntryRepository;
-import com.edigest.journalWebApp.services.UserService;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.JournalApplication;
+import com.edigest.journalwebapp.repository.UserEntryRepository;
+import com.edigest.journalwebapp.services.UserService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
 

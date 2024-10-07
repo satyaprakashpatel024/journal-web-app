@@ -1,6 +1,6 @@
-package com.edigest.journalWebApp.config;
+package com.edigest.journalwebapp.config;
 
-import com.edigest.journalWebApp.services.UserDetailServiceImp;
+import com.edigest.journalwebapp.services.UserDetailServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,6 @@ public class SpringSecurity {
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/journal/**", "/user/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-//                        .anyRequest().authenticated()
                         .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())

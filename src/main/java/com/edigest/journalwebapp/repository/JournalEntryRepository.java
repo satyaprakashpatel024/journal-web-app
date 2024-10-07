@@ -1,6 +1,6 @@
-package com.edigest.journalWebApp.repository;
+package com.edigest.journalwebapp.repository;
 
-import com.edigest.journalWebApp.Entity.JournalEntry;
+import com.edigest.journalwebapp.entity.JournalEntry;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

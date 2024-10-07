@@ -1,12 +1,14 @@
-package com.edigest.journalWebApp.controller;
+package com.edigest.journalwebapp.controller;
 
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.services.UserService;
+import com.edigest.journalwebapp.apiresponse.WeatherApiResponse;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.repository.UserEntryRepository;
+import com.edigest.journalwebapp.services.UserService;
+import com.edigest.journalwebapp.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +18,15 @@ public class UserEntryController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserEntryRepository userEntryRepository;
+
+    @Autowired
+    private WeatherService weatherService;
+
     //    get user details if user is authenticated
     @GetMapping("/get")
     public ResponseEntity<?> getUserByUserName(){
-        SecurityContext s = SecurityContextHolder.getContext();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         Users userEntry = userService.findByUserName(userName);
@@ -57,4 +64,16 @@ public class UserEntryController {
         return new ResponseEntity<>("User Not Found",HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/greet")
+    public ResponseEntity<?> greetingMethod(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        WeatherApiResponse response = weatherService.getWeather("Mumbai");
+        String messge = "";
+        if(response!=null  && response.getCurrent() != null){
+            int x = response.getCurrent().getFeelslike();
+            messge+=", todays Weather feels like "+x+"deg Celcius";
+        }
+        return new ResponseEntity<>("Hello! "+userName+messge,HttpStatus.OK);
+    }
 }

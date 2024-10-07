@@ -1,11 +1,9 @@
-package com.edigest.journalWebApp.services;
+package com.edigest.journalwebapp.services;
 
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.repository.UserEntryRepository;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.repository.UserEntryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

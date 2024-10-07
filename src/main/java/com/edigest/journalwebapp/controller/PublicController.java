@@ -1,7 +1,7 @@
-package com.edigest.journalWebApp.controller;
+package com.edigest.journalwebapp.controller;
 
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.services.UserService;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

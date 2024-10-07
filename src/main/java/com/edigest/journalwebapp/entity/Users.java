@@ -1,4 +1,4 @@
-package com.edigest.journalWebApp.Entity;
+package com.edigest.journalwebapp.entity;
 
 import lombok.*;
 import org.bson.types.ObjectId;

@@ -1,7 +1,7 @@
-package com.edigest.journalWebApp.services;
+package com.edigest.journalwebapp.services;
 
-import com.edigest.journalWebApp.Entity.Users;
-import com.edigest.journalWebApp.repository.UserEntryRepository;
+import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.repository.UserEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

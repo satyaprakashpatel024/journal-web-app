@@ -1,13 +1,14 @@
 package com.edigest;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-
+@SpringBootConfiguration
 @SpringBootTest
-class JournalApplicationTests {
+public class JournalApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
+	public void contextLoads() {
 
+	}
 }

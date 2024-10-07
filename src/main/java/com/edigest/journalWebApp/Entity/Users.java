@@ -1,8 +1,6 @@
 package com.edigest.journalWebApp.Entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -14,7 +12,9 @@ import java.util.List;
 
 @Document
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Users {
     @Id
     private ObjectId id;

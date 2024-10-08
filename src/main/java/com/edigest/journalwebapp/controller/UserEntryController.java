@@ -1,7 +1,7 @@
 package com.edigest.journalwebapp.controller;
 
 import com.edigest.journalwebapp.apiresponse.WeatherApiResponse;
-import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.entities.Users;
 import com.edigest.journalwebapp.repository.UserEntryRepository;
 import com.edigest.journalwebapp.services.UserService;
 import com.edigest.journalwebapp.services.WeatherService;
@@ -46,7 +46,7 @@ public class UserEntryController {
             userInDb.setUserName(user.getUserName());
             userInDb.setEmail(user.getEmail());
             userInDb.setPassword(user.getPassword());
-            userService.saveNewUser(userInDb);
+            userService.saveUser(userInDb);
             return new ResponseEntity<>(userInDb, HttpStatus.OK);
         }
         return new ResponseEntity<>("User not found...",HttpStatus.NOT_FOUND);

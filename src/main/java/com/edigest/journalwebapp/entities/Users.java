@@ -1,4 +1,4 @@
-package com.edigest.journalwebapp.entity;
+package com.edigest.journalwebapp.entities;
 
 import lombok.*;
 import org.bson.types.ObjectId;
@@ -10,11 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "users")
 public class Users {
     @Id
     private ObjectId id;
@@ -28,5 +28,5 @@ public class Users {
     private String password;
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
-    private List<String> roles;
+    private List<String> roles = new ArrayList<>();
 }

@@ -1,7 +1,7 @@
 package com.edigest.journalwebapp.controller;
 
-import com.edigest.journalwebapp.entity.JournalEntry;
-import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.entities.JournalEntry;
+import com.edigest.journalwebapp.entities.Users;
 import com.edigest.journalwebapp.services.JournalEntryService;
 import com.edigest.journalwebapp.services.UserService;
 import org.bson.types.ObjectId;
@@ -45,7 +45,7 @@ public class JournalEntryController {
         if(data != null && !data.isEmpty()){
             return new ResponseEntity<>(data,HttpStatus.OK);
         }
-        return new ResponseEntity<>("No data found..",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("No general found..",HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/create-journal")

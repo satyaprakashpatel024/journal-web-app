@@ -1,13 +1,12 @@
 package com.edigest.journalwebapp.services;
 
-import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.entities.Users;
 import com.edigest.journalwebapp.repository.UserEntryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -40,8 +39,15 @@ public class UserService {
         userEntryRepository.save(userEntry);
     }
 
-    public List<Users> getAll(){
-        return userEntryRepository.findAll();
+    public List<Users> getAll() {
+        try {
+            return userEntryRepository.findAll();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            log.warn("error while getting all users",e.getMessage());
+        }
+        return null;
     }
 
     public Optional<Users> getUserById(ObjectId id){

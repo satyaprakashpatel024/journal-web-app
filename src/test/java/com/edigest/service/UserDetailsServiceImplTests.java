@@ -1,6 +1,6 @@
 package com.edigest.service;
 
-import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.entities.Users;
 import com.edigest.journalwebapp.repository.UserEntryRepository;
 import com.edigest.journalwebapp.services.UserDetailServiceImp;
 import org.junit.jupiter.api.Assertions;

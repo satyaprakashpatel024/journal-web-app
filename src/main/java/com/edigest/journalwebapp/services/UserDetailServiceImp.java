@@ -1,13 +1,12 @@
 package com.edigest.journalwebapp.services;
 
-import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.entities.Users;
 import com.edigest.journalwebapp.repository.UserEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service

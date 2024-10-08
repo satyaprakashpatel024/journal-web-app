@@ -1,4 +1,4 @@
-package com.edigest.journalwebapp.entity;
+package com.edigest.journalwebapp.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document
 @Data
 @NoArgsConstructor
+@Document(collection = "journalEntry")
 public class JournalEntry {
     @Id
     private ObjectId id;

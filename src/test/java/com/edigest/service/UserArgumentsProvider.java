@@ -1,6 +1,6 @@
 package com.edigest.service;
 
-import com.edigest.journalwebapp.entity.Users;
+import com.edigest.journalwebapp.entities.Users;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;

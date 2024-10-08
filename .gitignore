@@ -35,3 +35,5 @@ build/
 /src/main/resources/application-prod.yml
 /htmlReport/
 /src/main/java/com/edigest/journalwebapp/ApiKeys.java
+/htmlReport/
+/src/main/resources/application.properties
